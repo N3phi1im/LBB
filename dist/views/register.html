@@ -1,0 +1,23 @@
+<div>
+  <form class="well container" ng-submit="ix.register()">
+    <div class="form-group">
+      <label>Username</label>
+      <input class="form-control" placeholder="Username..." ng-model="ix.user.username" required />
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input class="form-control" placeholder="Email..." ng-model="ix.user.email" type="email" required />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input class="form-control" type="password" placeholder="Password..." ng-model="ix.user.password" required />
+    </div>
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input class="form-control" type="password" placeholder="Confirm Password..." ng-model="ix.user.cpassword" required />
+    </div>
+    <div class="h-center">
+      <button type="submit" class="btn btn-sm btn-success" ng-disabled="!ix.user.username || !ix.user.email || !ix.user.password || !ix.user.cpassword || (ix.user.password !== ix.user.cpassword)">Submit</button>
+    </div>
+  </form>
+</div>

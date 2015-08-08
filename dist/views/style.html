@@ -1,0 +1,12 @@
+<div class="" ng-controller="HomeController as vm">
+  <div class="">
+    <div ng-repeat="style in vm.styles | orderBy: 'name'" >
+        <div class="link-container">
+          <div class="link-body">
+            <i class="link-arrow btn glyphicon glyphicon-chevron-right"></i>
+            <h2 class="btn-sm link-h2">{{style.name}}</h2>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+My Beer Journal
+	-Beers i've had
+	-Beers wishlist
+
+Search Beer
+	-beers
+	-categories
+	-styles
+	-breweries
+
+Find Beer near me
+	-location breweries
+		-beers they have
+
+Social beer
+	-tweet
+	-facebook
+
+Login and logout / register
