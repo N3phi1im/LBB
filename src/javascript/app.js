@@ -19,6 +19,12 @@
 		}).state('Style',{
 			url: '/Style',
 			templateUrl: 'views/style.html'
+		}).state('Profile',{
+			url: '/Profile',
+			templateUrl: 'views/profile.html'
+		}).state('Beer',{
+			url: '/Beer',
+			templateUrl: 'views/beer_profile.html'
 		});
 		$urlRouterProvider.otherwise('/');
 	}

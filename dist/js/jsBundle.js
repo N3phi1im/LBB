@@ -19,8 +19,40 @@
         }).state('Style', {
             url: '/Style',
             templateUrl: 'views/style.html'
+        }).state('Profile', {
+            url: '/Profile',
+            templateUrl: 'views/profile.html'
+        }).state('Beer', {
+            url: '/Beer',
+            templateUrl: 'views/beer_profile.html'
         });
         $urlRouterProvider.otherwise('/');
+    }
+})();
+
+(function () {
+    'use strict';
+    angular.module('app').controller('BeerController', BeerController);
+
+    BeerController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "$state"];
+
+    function BeerController(HomeFactory, UserFactory, BeerFactory, $state) {
+
+        // Declarations
+
+        var bc = this;
+        bc.grabbed = BeerFactory.grabbed;
+        bc.beers = {};
+        // Functions List
+
+        bc.grab = function (beer) {
+            bc.beers.id = beer;
+            BeerFactory.grab(bc.beers).then(function () {
+                $state.go('Beer');
+            });
+        };
+
+
     }
 })();
 
@@ -41,6 +73,7 @@
         vm.results = BeerFactory.results;
         vm.cats = BeerFactory.cats;
         vm.styles = BeerFactory.styles;
+        vm.goHome = goHome;
 
         // Functions List
 
@@ -60,6 +93,9 @@
             });
         }
 
+        function goHome() {
+            $state.go('Home');
+        }
 
     }
 })();
@@ -86,19 +122,19 @@
         function register() {
             var u = ix.user;
             if (!u.username || !u.email || !u.password || !u.cpassword || (u.password !== u.cpassword)) {
-                $window.alert("Please fill all fields!")
+                $window.alert("Please fill all fields!");
                 return false;
             }
             UserFactory.register(u).then(function () {
                 ix.user = {};
-                $state.go('Home');
+                $state.go('Profile');
             });
         }
 
         function login() {
             UserFactory.login(ix.user).then(function () {
                 ix.user = {};
-                $state.go('Home');
+                $state.go('Profile');
             });
         }
     }
@@ -116,9 +152,11 @@
 
         var o = {};
         o.results = [];
+        o.grabbed = [];
         o.cats = [];
         o.styles = [];
         o.searchBeer = searchBeer;
+        o.grab = grab;
         o.getCategory = getCategory;
         o.getStyle = getStyle;
         return o;
@@ -128,13 +166,25 @@
         // Search Beer
 
         function searchBeer(search) {
-            console.log(search);
             var q = $q.defer();
             $http.post('/api/Beer/searchBeer', search).success(function (res) {
-                console.log(res);
                 o.results.length = 0;
                 for (var i = 0; i < res.length; i++) {
                     o.results.push(res[i]);
+                    q.resolve();
+                }
+            });
+            return q.promise;
+        }
+
+        // Grab beer
+
+        function grab(beer) {
+            var q = $q.defer();
+            $http.post('/api/Beer/grab', beer).success(function (res) {
+                o.grabbed.length = 0;
+                if (res) {
+                    o.grabbed.push(res);
                     q.resolve();
                 }
             });

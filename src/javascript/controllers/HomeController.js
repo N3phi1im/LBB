@@ -16,6 +16,7 @@
 		vm.results = BeerFactory.results;
 		vm.cats = BeerFactory.cats;
 		vm.styles = BeerFactory.styles;
+		vm.goHome = goHome;
 
 		// Functions List
 
@@ -36,6 +37,9 @@
 			});
 		}
 
+		function goHome() {
+			$state.go('Home');
+		}
 
 	}
 })();

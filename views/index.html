@@ -18,12 +18,12 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" ui-sref="Home">LBB</a>
+				<a class="navbar-brand" ui-sref="Profile">LBB</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" collapse="!ix.navbarCollapsed">
 				<ul class="nav navbar-nav">
-					<li><a ng-controller='HomeController as vm' class='c_p' ng-click='vm.search(); ix.navBarCollapsed = !ix.navbarCollapsed'>Search <span class="sr-only">(current)</span></a></li>
+					<li><a ng-controller='HomeController as vm' class='c_p' ng-click="vm.goHome(); ix.navbarCollapsed = !ix.navbarCollapsed">Search <span class="sr-only">(current)</span></a></li>
 					<li><a ng-controller='HomeController as vm' class="c_p" ng-click="vm.getCategory(); ix.navbarCollapsed = !ix.navbarCollapsed">Categories <span class="sr-only">(current)</span></a></li>
 					<li><a ng-controller='HomeController as vm' class="c_p" ng-click="vm.getStyle(); ix.navbarCollapsed = !ix.navbarCollapsed">Styles <span class="sr-only">(current)</span></a></li>
 				</ul>

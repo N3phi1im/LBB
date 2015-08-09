@@ -1,15 +1,18 @@
-<div class="" ng-controller="HomeController as vm">
-  <div class="flex-container">
-    <div ng-repeat="beer in vm.results | orderBy: 'nameDisplay'">
-      <div class="flex-item">
+<div class="" ng-controller="BeerController as bc">
+  <div class="Container-fluid">
+    <div ng-repeat="beer in bc.grabbed">
+      <div class="">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title"><b>{{beer.nameDisplay}}</b></h2>
           </div>
           <div class="panel-body">
-            <p class='left' ng-if='beer.abv != null'><i>ABV:  </i>{{beer.abv}}</p>
-            <p class='float_right' ng-if='beer.ibu != null'><i>IBU:  </i>{{beer.ibu}}</p>
-            <p class='' ng-show='beer.style.name != null'><i>Style:</i><p>{{beer.style.name}}</p></p>
+            <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>
+            <p class='left' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</p>
+            <img ng-src='{{beer.labels.medium}}' class='float_right img img-responsive' ng-if='beer.labels.medium != null'></img>
+            <p ng-show='beer.style.name != null'><i>Style:&nbsp;</i>{{beer.style.name}}</p>
+            <p ng-show='beer.style.name != null'><i>Description: </i><p>{{beer.description}}</p></p>
+            <p ng-show='beer.available.name != null'><i>Availability:</i><p>{{beer.available.name}}</p></p>
           </div>
         </div>
       </div>

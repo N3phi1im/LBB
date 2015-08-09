@@ -11,8 +11,15 @@ var router = express.Router();
 // Beer search
 
 router.post('/searchBeer', function(req, res, next) {
-  console.log(req.body);
   brewdb.search.beers(req.body, function(err, data) {
+    res.send(data);
+  });
+});
+
+// Grab Beer
+
+router.post('/grab', function(req, res, next) {
+  brewdb.beer.getById(req.body.id, {}, function(err, data) {
     res.send(data);
   });
 });

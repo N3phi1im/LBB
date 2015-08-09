@@ -1,18 +1,18 @@
 <div class="" ng-controller="HomeController as vm">
   <form class="form-group" ng-submit='vm.search(vm.s)'>
-    <input type="text" class='form-control' ng-model='vm.s.q' />
+    <input type="text" placeholder="Start looking for Beer..." class='form-control' ng-model='vm.s.q' />
     <button ng-show="false" type="submit" class='btn btn-info'>Find Beer</button>
   </form>
   <div class="flex-container">
     <div ng-repeat="beer in vm.results">
-      <div class="flex-item">
+      <div ng-controller='BeerController as bc' class="flex-item" ng-click='bc.grab(beer.id)'>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title"><b>{{beer.nameDisplay}}</b></h2>
           </div>
           <div class="panel-body">
-            <p class='left' ng-if='beer.abv != null'><i>ABV:  </i>{{beer.abv}}</p>
-            <p class='float_right' ng-if='beer.ibu != null'><i>IBU:  </i>{{beer.ibu}}</p>
+            <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>
+            <p class='float_right' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</p>
             <p ng-show='beer.style.name != null'><i>Style:</i><p>{{beer.style.shortName}}</p></p>
           </div>
         </div>
