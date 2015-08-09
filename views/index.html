@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-	<title>BeerApp</title>
+	<title>LBB</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap_theme.min.css">
@@ -18,12 +18,12 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" ui-sref="Home">Home</a>
+				<a class="navbar-brand" ui-sref="Home">LBB</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" collapse="!ix.navbarCollapsed">
 				<ul class="nav navbar-nav">
-					<li><a ng-controller='HomeController as vm' class="c_p" ng-click="vm.search()">Search <span class="sr-only">(current)</span></a></li>
+					<li><a ng-controller='HomeController as vm' class='c_p' ng-click='vm.search(); ix.navBarCollapsed = !ix.navbarCollapsed'>Search <span class="sr-only">(current)</span></a></li>
 					<li><a ng-controller='HomeController as vm' class="c_p" ng-click="vm.getCategory(); ix.navbarCollapsed = !ix.navbarCollapsed">Categories <span class="sr-only">(current)</span></a></li>
 					<li><a ng-controller='HomeController as vm' class="c_p" ng-click="vm.getStyle(); ix.navbarCollapsed = !ix.navbarCollapsed">Styles <span class="sr-only">(current)</span></a></li>
 				</ul>

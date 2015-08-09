@@ -44,8 +44,8 @@
 
         // Functions List
 
-        function searchBeer() {
-            BeerFactory.searchBeer().then(function () {});
+        function searchBeer(s) {
+            BeerFactory.searchBeer(s).then(function () {});
         }
 
         function getCategory() {
@@ -127,9 +127,11 @@
 
         // Search Beer
 
-        function searchBeer() {
+        function searchBeer(search) {
+            console.log(search);
             var q = $q.defer();
-            $http.post('/api/Beer/searchBeer').success(function (res) {
+            $http.post('/api/Beer/searchBeer', search).success(function (res) {
+                console.log(res);
                 o.results.length = 0;
                 for (var i = 0; i < res.length; i++) {
                     o.results.push(res[i]);
@@ -145,7 +147,7 @@
             var q = $q.defer();
             $http.post('/api/Beer/Category').success(function (res) {
                 o.cats.length = 0;
-                for (var i = 0; i < res.length; i++) {
+                for (var i = 0; i <= 13; i++) {
                     o.cats.push(res[i]);
                     q.resolve();
                 }

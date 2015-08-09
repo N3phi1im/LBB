@@ -19,8 +19,8 @@
 
 		// Functions List
 
-		function searchBeer() {
-			BeerFactory.searchBeer().then(function() {
+		function searchBeer(s) {
+			BeerFactory.searchBeer(s).then(function() {
 			});
 		}
 
