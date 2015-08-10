@@ -16,7 +16,7 @@ require('./config/passport');
 
 // Connect to the DB
 
-mongoose.connect('mongodb://localhost/BeerApp');
+mongoose.connect('mongodb://johndoe:123123@ds031183.mongolab.com:31183/littlebeerbook');
 
 // Routing
 
