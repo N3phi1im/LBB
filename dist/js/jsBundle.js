@@ -38,6 +38,166 @@
 
 (function () {
     'use strict';
+    angular.module('app').controller('BeerController', BeerController);
+
+    BeerController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "$state"];
+
+    function BeerController(HomeFactory, UserFactory, BeerFactory, $state) {
+
+        // Declarations
+
+        var bc = this;
+        bc.grabbed = BeerFactory.grabbed;
+        bc.beers = {};
+        // Functions List
+
+        bc.grab = function (beer) {
+            bc.beers.id = beer;
+            BeerFactory.grab(bc.beers).then(function () {
+                $state.go('Beer');
+            });
+        };
+
+
+    }
+})();
+
+(function () {
+    'use strict';
+    angular.module('app').controller('HomeController', HomeController);
+
+    HomeController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "$state"];
+
+    function HomeController(HomeFactory, UserFactory, BeerFactory, $state) {
+
+        // Declarations
+
+        var vm = this;
+        vm.search = searchBeer;
+        vm.getCategory = getCategory;
+        vm.getStyle = getStyle;
+        vm.results = BeerFactory.results;
+        vm.cats = BeerFactory.cats;
+        vm.styles = BeerFactory.styles;
+        vm.goHome = goHome;
+
+        // Functions List
+
+        function searchBeer(s) {
+            BeerFactory.searchBeer(s).then(function () {});
+        }
+
+        function getCategory() {
+            BeerFactory.getCategory().then(function () {
+                $state.go('Cat');
+            });
+        }
+
+        function getStyle() {
+            BeerFactory.getStyle().then(function () {
+                $state.go('Style');
+            });
+        }
+
+        function goHome() {
+            $state.go('Home');
+        }
+
+    }
+})();
+
+(function () {
+    'use strict';
+    angular.module('app').controller('IndexController', IndexController);
+
+    IndexController.$inject = ["UserFactory", "ProfileFactory", "$state", "$window"];
+
+    function IndexController(UserFactory, ProfileFactory, $state, $window) {
+
+        // Declarations
+
+        var ix = this;
+        ix.user = {};
+        ix.status = UserFactory.status;
+        ix.register = register;
+        ix.login = login;
+        ix.logout = logout;
+
+        // Functions List
+
+        function register() {
+            var u = ix.user;
+            if (!u.username || !u.email || !u.password || !u.cpassword || (u.password !== u.cpassword)) {
+                $window.alert("Please fill all fields!");
+                return false;
+            }
+            UserFactory.register(u).then(function () {
+                ix.user = {};
+                $state.go('Profile');
+            });
+        }
+
+        function login() {
+            UserFactory.login(ix.user).then(function () {
+                ix.user = {};
+                $state.go('Profile');
+            });
+        }
+
+        function logout() {
+            ProfileFactory.beer_had.length = 0;
+            ProfileFactory.beer_want.length = 0;
+            UserFactory.logout();
+        }
+
+    }
+})();
+
+(function () {
+    'use strict';
+    angular.module('app').controller('ProfileController', ProfileController);
+
+    ProfileController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "ProfileFactory", "$state"];
+
+    function ProfileController(HomeFactory, UserFactory, BeerFactory, ProfileFactory, $state) {
+
+        // Declarations
+
+        var pc = this;
+        pc.beer_had = ProfileFactory.beer_had;
+        pc.beer_want = ProfileFactory.beer_want;
+        pc.add_had = add_had;
+        pc.add_want = add_want;
+        pc.grab = grab;
+        pc.grabbed = ProfileFactory.grabbed;
+        ProfileFactory.getbeerhad();
+        ProfileFactory.getbeerwant();
+
+        // Functions List
+
+        function add_had(beer) {
+            ProfileFactory.add_had(beer).then(function () {
+                $state.go('Profile');
+            });
+        }
+
+        function add_want(beer) {
+            ProfileFactory.add_want(beer).then(function () {
+                $state.go('Home');
+            });
+        }
+
+        function grab(beer) {
+            ProfileFactory.grab(beer).then(function () {
+                $state.go('Profile_beer');
+            });
+        }
+
+    }
+})();
+
+(function () {
+    'use strict';
     angular.module('app').factory('BeerFactory', BeerFactory);
 
     BeerFactory.$inject = ['$http', '$q'];
@@ -332,165 +492,5 @@
         function getUsername() {
             return JSON.parse(atob(getToken().split('.')[1])).username;
         }
-    }
-})();
-
-(function () {
-    'use strict';
-    angular.module('app').controller('BeerController', BeerController);
-
-    BeerController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "$state"];
-
-    function BeerController(HomeFactory, UserFactory, BeerFactory, $state) {
-
-        // Declarations
-
-        var bc = this;
-        bc.grabbed = BeerFactory.grabbed;
-        bc.beers = {};
-        // Functions List
-
-        bc.grab = function (beer) {
-            bc.beers.id = beer;
-            BeerFactory.grab(bc.beers).then(function () {
-                $state.go('Beer');
-            });
-        };
-
-
-    }
-})();
-
-(function () {
-    'use strict';
-    angular.module('app').controller('HomeController', HomeController);
-
-    HomeController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "$state"];
-
-    function HomeController(HomeFactory, UserFactory, BeerFactory, $state) {
-
-        // Declarations
-
-        var vm = this;
-        vm.search = searchBeer;
-        vm.getCategory = getCategory;
-        vm.getStyle = getStyle;
-        vm.results = BeerFactory.results;
-        vm.cats = BeerFactory.cats;
-        vm.styles = BeerFactory.styles;
-        vm.goHome = goHome;
-
-        // Functions List
-
-        function searchBeer(s) {
-            BeerFactory.searchBeer(s).then(function () {});
-        }
-
-        function getCategory() {
-            BeerFactory.getCategory().then(function () {
-                $state.go('Cat');
-            });
-        }
-
-        function getStyle() {
-            BeerFactory.getStyle().then(function () {
-                $state.go('Style');
-            });
-        }
-
-        function goHome() {
-            $state.go('Home');
-        }
-
-    }
-})();
-
-(function () {
-    'use strict';
-    angular.module('app').controller('IndexController', IndexController);
-
-    IndexController.$inject = ["UserFactory", "ProfileFactory", "$state", "$window"];
-
-    function IndexController(UserFactory, ProfileFactory, $state, $window) {
-
-        // Declarations
-
-        var ix = this;
-        ix.user = {};
-        ix.status = UserFactory.status;
-        ix.register = register;
-        ix.login = login;
-        ix.logout = logout;
-
-        // Functions List
-
-        function register() {
-            var u = ix.user;
-            if (!u.username || !u.email || !u.password || !u.cpassword || (u.password !== u.cpassword)) {
-                $window.alert("Please fill all fields!");
-                return false;
-            }
-            UserFactory.register(u).then(function () {
-                ix.user = {};
-                $state.go('Profile');
-            });
-        }
-
-        function login() {
-            UserFactory.login(ix.user).then(function () {
-                ix.user = {};
-                $state.go('Profile');
-            });
-        }
-
-        function logout() {
-            ProfileFactory.beer_had.length = 0;
-            ProfileFactory.beer_want.length = 0;
-            UserFactory.logout();
-        }
-
-    }
-})();
-
-(function () {
-    'use strict';
-    angular.module('app').controller('ProfileController', ProfileController);
-
-    ProfileController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "ProfileFactory", "$state"];
-
-    function ProfileController(HomeFactory, UserFactory, BeerFactory, ProfileFactory, $state) {
-
-        // Declarations
-
-        var pc = this;
-        pc.beer_had = ProfileFactory.beer_had;
-        pc.beer_want = ProfileFactory.beer_want;
-        pc.add_had = add_had;
-        pc.add_want = add_want;
-        pc.grab = grab;
-        pc.grabbed = ProfileFactory.grabbed;
-        ProfileFactory.getbeerhad();
-        ProfileFactory.getbeerwant();
-
-        // Functions List
-
-        function add_had(beer) {
-            ProfileFactory.add_had(beer).then(function () {
-                $state.go('Profile');
-            });
-        }
-
-        function add_want(beer) {
-            ProfileFactory.add_want(beer).then(function () {
-                $state.go('Home');
-            });
-        }
-
-        function grab(beer) {
-            ProfileFactory.grab(beer).then(function () {
-                $state.go('Profile_beer');
-            });
-        }
-
     }
 })();

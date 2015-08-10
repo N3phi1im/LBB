@@ -49,10 +49,10 @@ router.post('/beer_had', auth, function(req, res, next) {
   if(req.body.ibu) {
     cbeer.ibu = req.body.ibu;
   }
-  if(req.body.labels.medium) {
+  if(req.body.labels) {
     cbeer.label = req.body.labels.medium;
   }
-  if(req.body.available.name) {
+  if(req.body.available) {
     cbeer.available = req.body.available.name;
   }
   if(req.body.style.shortName) {
@@ -92,10 +92,10 @@ router.post('/beer_want', auth, function(req, res, next) {
   if(req.body.ibu) {
     cbeer.ibu = req.body.ibu;
   }
-  if(req.body.labels.medium) {
+  if(req.body.labels) {
     cbeer.label = req.body.labels.medium;
   }
-  if(req.body.available.name) {
+  if(req.body.available) {
     cbeer.available = req.body.available.name;
   }
   if(req.body.style.shortName) {
