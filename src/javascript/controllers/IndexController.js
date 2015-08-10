@@ -3,9 +3,9 @@
 	angular.module('app')
 	.controller('IndexController', IndexController);
 
-	IndexController.$inject = ["UserFactory", "$state"];
+	IndexController.$inject = ["UserFactory", "$state", "$window"];
 
-	function IndexController(UserFactory, $state) {
+	function IndexController(UserFactory, $state, $window) {
 
 		// Declarations
 
