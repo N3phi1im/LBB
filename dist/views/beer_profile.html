@@ -4,14 +4,16 @@
       <div class="">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h2 class="panel-title"><b>{{beer.nameDisplay}}</b></h2>
+            <h2 class="h-center panel-title"><b class="font_beer">{{beer.nameDisplay}}</b></h2>
           </div>
           <div class="panel-body">
             <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>
             <p class='left' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</p>
-            <img ng-src='{{beer.labels.medium}}' class='float_right img img-responsive' ng-if='beer.labels.medium != null'></img>
+            <button ng-controller='ProfileController as pc' type="button" class="btn btn-xs btn-success float_right" ng-click='pc.add_had(beer)'>Had it</button>
+            <button ng-controller='ProfileController as pc' type="button" class="btn btn-xs btn-info btn_beer float_right" ng-click='pc.add_wish(beer)'>Want it</button>
+            <p><img ng-src='{{beer.labels.medium}}' class='float_right img img-responsive' ng-if='beer.labels.medium != null'></img></p>
             <p ng-show='beer.style.name != null'><i>Style:&nbsp;</i>{{beer.style.name}}</p>
-            <p ng-show='beer.style.name != null'><i>Description: </i><p>{{beer.description}}</p></p>
+            <p ng-show='beer.style.name != null'><i>Description: </i><p id="desc">{{beer.description}}</p></p>
             <p ng-show='beer.available.name != null'><i>Availability:</i><p>{{beer.available.name}}</p></p>
           </div>
         </div>

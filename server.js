@@ -12,6 +12,8 @@ var brewdb = new BreweryDb('6fc41969a626d0aa90d7a610f9e55dfb');
 // Models for Passport
 
 require('./models/user');
+require('./models/beer_had');
+require('./models/beer_want');
 require('./config/passport');
 
 // Connect to the DB
@@ -22,6 +24,7 @@ mongoose.connect('mongodb://johndoe:123123@ds031183.mongolab.com:31183/littlebee
 
 var userRoute = require('./routes/userRoute');
 var beerRoute = require('./routes/beerRoute');
+var profileRoute = require('./routes/profileRoute');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -51,6 +54,7 @@ app.get('/', function(req, res) {
 
 app.use('/api/Users', userRoute);
 app.use('/api/Beer', beerRoute);
+app.use('/api/beers', profileRoute);
 
 var server = app.listen(port, function() {
 	var host = server.address().address;

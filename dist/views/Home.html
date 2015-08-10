@@ -8,7 +8,7 @@
       <div ng-controller='BeerController as bc' class="flex-item" ng-click='bc.grab(beer.id)'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h2 class="panel-title"><b>{{beer.nameDisplay}}</b></h2>
+            <h2 class="panel-title"><b class="font_beer">{{beer.nameDisplay}}</b></h2>
           </div>
           <div class="panel-body">
             <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>

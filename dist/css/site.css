@@ -22,15 +22,15 @@
 
 .flex-item {
   padding: 5px;
-  width: 200px;
+  width: 175px;
   margin-top: 10px;
   -webkit-align-self: stretch;
       -ms-flex-item-align: stretch;
           align-self: stretch;
 }
 .flex-item > .panel {
-  min-height: 250px;
-  max-height: 250px;
+  min-height: 200px;
+  max-height: 200px;
   overflow-y: hidden;
   margin-top: 5px;
 }
@@ -129,4 +129,28 @@ body {
 
 .m-bot {
   margin-bottom: 0px;
+}
+
+@media (min-width: 500px) {
+  #desc {
+    width: 60%;
+  }
+}
+@media (max-width: 400px) {
+  #desc {
+    width: 100%;
+  }
+}
+.btn_beer {
+  margin-right: 5px;
+}
+
+i {
+  font-family: 'Permanent Marker', cursive;
+  color: #7f8c8d;
+}
+
+.font_beer {
+  font-family: 'Permanent Marker', cursive;
+  font-weight: lighter;
 }

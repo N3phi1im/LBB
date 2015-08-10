@@ -1,15 +1,15 @@
-<div class="" ng-controller="HomeController as vm">
+<div class="" ng-controller="ProfileController as pc">
   <div class="flex-container">
-    <div ng-repeat="beer in vm.results | orderBy: 'nameDisplay'">
+    <div ng-repeat="beer in pc.beer_had">
       <div class="flex-item">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h2 class="panel-title"><b>{{beer.nameDisplay}}</b></h2>
+            <h2 class="panel-title"><b>{{beer.beer_had.nameDisplay}}</b></h2>
           </div>
           <div class="panel-body">
-            <p class='left' ng-if='beer.abv != null'><i>ABV:  </i>{{beer.abv}}</p>
-            <p class='float_right' ng-if='beer.ibu != null'><i>IBU:  </i>{{beer.ibu}}</p>
-            <p class='' ng-show='beer.style.name != null'><i>Style:</i><p>{{beer.style.name}}</p></p>
+            <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>
+            <p class='float_right' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</p>
+            <p class='' ng-show='beer.style.name != null'><i>Style:&nbsp;</i><p>{{beer.style.name}}</p></p>
           </div>
         </div>
       </div>
