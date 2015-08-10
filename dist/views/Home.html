@@ -1,7 +1,9 @@
 <div class="" ng-controller="HomeController as vm">
   <form class="form-group" ng-submit='vm.search(vm.s)'>
-    <input type="text" placeholder="Start looking for Beer..." class='form-control' ng-model='vm.s.q' />
-    <button ng-show="false" type="submit" class='btn btn-info'>Find Beer</button>
+    <input type="text" placeholder="Start looking for Beer..." class='form-control m-top-10' ng-model='vm.s.q' />
+    <div class="h-center">
+      <button type="submit" class='m-top-10 btn btn-success'>Find Beer</button>
+    </div>
   </form>
   <div class="flex-container">
     <div ng-repeat="beer in vm.results">

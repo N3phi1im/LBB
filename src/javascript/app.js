@@ -28,6 +28,9 @@
 		}).state('Profile_beer',{
 			url: '/Profile_beer',
 			templateUrl: 'views/profile_selected_beer.html'
+		}).state('Wishlist',{
+			url: '/Wishlist',
+			templateUrl: 'views/wishlist.html'
 		});
 		$urlRouterProvider.otherwise('/');
 	}

@@ -34,8 +34,7 @@
 		}
 
 		function grab(beer) {
-			pc.beers.id = beer;
-				ProfileFactory.grab(pc.beers).then(function() {
+				ProfileFactory.grab(beer).then(function() {
 					$state.go('Profile_beer');
 				});
 		}

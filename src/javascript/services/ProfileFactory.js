@@ -13,7 +13,9 @@
 		o.beer_had = [];
 		o.beer_want = [];
 		o.grabbed = [];
+		o.grab = grab;
 		o.add_had = add_had;
+		o.add_want = add_want;
 		o.getbeerhad = getbeerhad;
 		o.getbeerwant = getbeerwant;
 		return o;
@@ -40,6 +42,7 @@
 
 		function getbeerhad() {
 			$http.get('/api/beers/beer_had', {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}}).success(function(res) {
+				o.beer_had.length = 0;
 				for (var i = 0; i < res.length; i++) {
 					res[i].dateHad = new Date(res[i].dateHad);
 					o.beer_had.push(res[i]);
@@ -47,19 +50,35 @@
 			});
 		}
 
+		// Add beer Had
+
+		function add_want(beer) {
+			var q = $q.defer();
+			$http.post('/api/beers/beer_want', beer, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}}).success(function(res) {
+				beer._id = res.id;
+				o.beer_want.push(beer);
+				q.resolve();
+			}).error(function(res) {
+				console.error('YOU DONE MESSED UP! A A RON!');
+				q.reject(res);
+			});
+			return q.promise;
+		}
+
 		// Get Beer Wishlist
 
 		function getbeerwant()  {
-			$http.get('/api/beers/beer_want').success(function(res) {
+			$http.get('/api/beers/beer_want', {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}}).success(function(res) {
+				o.beer_want.length = 0;
 				for (var i = 0; i < res.length; i++) {
 					o.beer_want.push(res[i]);
 				}
 			});
 		}
 
-		function grab(beer) {
+		function grab(id) {
 			var q = $q.defer();
-			$http.post('/api/beers/grab', beer).success(function(res) {
+			$http.get('/api/beers/grab/' + id).success(function(res) {
 				o.grabbed.length = 0;
 				if(res) {
 					o.grabbed.push(res);

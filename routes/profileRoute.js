@@ -10,6 +10,18 @@ var router = express.Router();
 
 var auth = jwt({secret: 'bananas', userProperty: 'payload'});
 
+// Set Params
+
+router.param('beer', function(req, res, next, id) {
+  Beer_had.findOne({
+    _id: id
+  }).exec(function(err, beer) {
+    if (err) return next(err);
+    req.beer = beer;
+    next();
+  });
+});
+
 // Get Beers Had
 
 router.get('/beer_had', auth, function(req, res, next) {
@@ -25,16 +37,28 @@ router.get('/beer_had', auth, function(req, res, next) {
 router.post('/beer_had', auth, function(req, res, next) {
   var cbeer = new Beer_had(req.body);
   cbeer.dateHad = new Date();
-  cbeer.description = req.body.description;
-  cbeer.nameDisplay = req.body.nameDisplay;
-  cbeer.abv = req.body.abv;
-  cbeer.ibu = req.body.ibu;
-  cbeer.id = req.body.id;
-  cbeer.available = req.body.available.name;
+  if(req.body.description) {
+    cbeer.description = req.body.description;
+  }
+  if(req.body.nameDisplay) {
+    cbeer.nameDisplay = req.body.nameDisplay;
+  }
+  if(req.body.abv) {
+    cbeer.abv = req.body.abv;
+  }
+  if(req.body.ibu) {
+    cbeer.ibu = req.body.ibu;
+  }
   if(req.body.labels.medium) {
     cbeer.label = req.body.labels.medium;
   }
-  cbeer.style = req.body.style.shortName;
+  if(req.body.available.name) {
+    cbeer.available = req.body.available.name;
+  }
+  if(req.body.style.shortName) {
+    cbeer.style = req.body.style.shortName;
+  }
+  cbeer.id = req.body.id;
   cbeer.user = req.payload.id;
   cbeer.save(function(err, beer_had) {
     if(err) return next(err);
@@ -42,10 +66,51 @@ router.post('/beer_had', auth, function(req, res, next) {
   });
 });
 
-router.post('/grab', function(req, res, next) {
-  brewdb.beer.getById(req.body.id, {}, function(err, data) {
-    res.send(data);
+// Get Beers Wishlist
+
+router.get('/beer_want', auth, function(req, res, next) {
+  var query = Beer_want.find({user:req.payload.id});
+  query.exec(function(err, beers) {
+    if(err) return next(err);
+    res.json(beers);
   });
+});
+
+// Send beer to wishlist
+
+router.post('/beer_want', auth, function(req, res, next) {
+  var cbeer = new Beer_want(req.body);
+  if(req.body.description) {
+    cbeer.description = req.body.description;
+  }
+  if(req.body.nameDisplay) {
+    cbeer.nameDisplay = req.body.nameDisplay;
+  }
+  if(req.body.abv) {
+    cbeer.abv = req.body.abv;
+  }
+  if(req.body.ibu) {
+    cbeer.ibu = req.body.ibu;
+  }
+  if(req.body.labels.medium) {
+    cbeer.label = req.body.labels.medium;
+  }
+  if(req.body.available.name) {
+    cbeer.available = req.body.available.name;
+  }
+  if(req.body.style.shortName) {
+    cbeer.style = req.body.style.shortName;
+  }
+  cbeer.id = req.body.id;
+  cbeer.user = req.payload.id;
+  cbeer.save(function(err, beer_want) {
+    if(err) return next(err);
+    res.send({id: beer_want._id});
+  });
+});
+
+router.get('/grab/:beer', function(req, res, next) {
+  res.send(req.beer);
 });
 
 module.exports = router;

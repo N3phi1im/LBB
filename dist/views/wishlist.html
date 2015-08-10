@@ -2,7 +2,7 @@
   <div class="">
     <button type="button" ui-sref="Profile" class="mainbtn m-bot-5 btn btn-warning left">Beer I've had</button>
     <button type="button" ui-sref='Wishlist' class="mainbtn m-bot-5 btn btn-info float_right">Beer Wishlist</button>
-    <div ng-repeat="beer in pc.beer_had | orderBy: '-dateHad'">
+    <div ng-repeat="beer in pc.beer_want">
       <div class="row">
         <div class="panel panel-default">
           <div class="panel-heading" ng-click="pc.grab(beer._id)">
@@ -11,9 +11,6 @@
           <div class="panel-body">
             <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>
             <span class='left' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</span>
-            <button type="button" class="btn btn-xs btn-danger btn_beer float_right glyphicon glyphicon-thumbs-down" ng-click=''></button>
-            <button type="button" class="btn btn-xs btn-success btn_beer float_right glyphicon glyphicon-thumbs-up" ng-click=''></button>
-            <p class=""><i>Had on:&nbsp;</i>{{beer.dateHad | date: "short"}}</p>
           </div>
         </div>
       </div>
