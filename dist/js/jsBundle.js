@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('app', ['ui.router', 'ui.bootstrap', 'infinite-scroll']).config(Config);
+    angular.module('app', ['ui.router', 'ui.bootstrap']).config(Config);
     Config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function Config($stateProvider, $urlRouterProvider) {
