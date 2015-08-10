@@ -6,7 +6,7 @@
 	function Config($stateProvider, $urlRouterProvider) {
 		$stateProvider.state('Home',{
 			url: '/',
-			templateUrl: 'views/home.html'
+			templateUrl: 'views/Home.html'
 		}).state('Register',{
 			url: '/Register',
 			templateUrl: 'views/register.html'
