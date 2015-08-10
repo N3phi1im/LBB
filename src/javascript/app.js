@@ -25,6 +25,9 @@
 		}).state('Beer',{
 			url: '/Beer',
 			templateUrl: 'views/beer_profile.html'
+		}).state('Profile_beer',{
+			url: '/Profile_beer',
+			templateUrl: 'views/profile_selected_beer.html'
 		});
 		$urlRouterProvider.otherwise('/');
 	}

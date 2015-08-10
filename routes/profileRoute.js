@@ -13,7 +13,7 @@ var auth = jwt({secret: 'bananas', userProperty: 'payload'});
 // Get Beers Had
 
 router.get('/beer_had', auth, function(req, res, next) {
-  var query = Beer_had.find({});
+  var query = Beer_had.find({user:req.payload.id});
   query.exec(function(err, beers) {
     if(err) return next(err);
     res.json(beers);
@@ -31,12 +31,20 @@ router.post('/beer_had', auth, function(req, res, next) {
   cbeer.ibu = req.body.ibu;
   cbeer.id = req.body.id;
   cbeer.available = req.body.available.name;
-  cbeer.label = req.body.labels.medium;
+  if(req.body.labels.medium) {
+    cbeer.label = req.body.labels.medium;
+  }
   cbeer.style = req.body.style.shortName;
   cbeer.user = req.payload.id;
   cbeer.save(function(err, beer_had) {
     if(err) return next(err);
     res.send({id: beer_had._id});
+  });
+});
+
+router.post('/grab', function(req, res, next) {
+  brewdb.beer.getById(req.body.id, {}, function(err, data) {
+    res.send(data);
   });
 });
 

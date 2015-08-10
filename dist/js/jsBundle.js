@@ -25,6 +25,9 @@
         }).state('Beer', {
             url: '/Beer',
             templateUrl: 'views/beer_profile.html'
+        }).state('Profile_beer', {
+            url: '/Profile_beer',
+            templateUrl: 'views/profile_selected_beer.html'
         });
         $urlRouterProvider.otherwise('/');
     }
@@ -104,9 +107,9 @@
     'use strict';
     angular.module('app').controller('IndexController', IndexController);
 
-    IndexController.$inject = ["UserFactory", "$state", "$window"];
+    IndexController.$inject = ["UserFactory", "ProfileFactory", "$state", "$window"];
 
-    function IndexController(UserFactory, $state, $window) {
+    function IndexController(UserFactory, ProfileFactory, $state, $window) {
 
         // Declarations
 
@@ -115,7 +118,7 @@
         ix.status = UserFactory.status;
         ix.register = register;
         ix.login = login;
-        ix.logout = UserFactory.logout;
+        ix.logout = logout;
 
         // Functions List
 
@@ -137,6 +140,13 @@
                 $state.go('Profile');
             });
         }
+
+        function logout() {
+            ProfileFactory.beer_had.length = 0;
+            ProfileFactory.beer_want.length = 0;
+            UserFactory.logout();
+        }
+
     }
 })();
 
@@ -155,6 +165,10 @@
         pc.beer_want = ProfileFactory.beer_want;
         pc.add_had = add_had;
         pc.add_want = add_want;
+        pc.grab = grab;
+        pc.grabbed = ProfileFactory.grabbed;
+        ProfileFactory.getbeerhad();
+        ProfileFactory.getbeerwant();
 
         // Functions List
 
@@ -167,6 +181,13 @@
         function add_want(beer) {
             ProfileFactory.add_want(beer).then(function () {
                 $state.go('Home');
+            });
+        }
+
+        function grab(beer) {
+            pc.beers.id = beer;
+            ProfileFactory.grab(pc.beers).then(function () {
+                $state.go('Profile_beer');
             });
         }
 
@@ -286,9 +307,10 @@
         var o = {};
         o.beer_had = [];
         o.beer_want = [];
+        o.grabbed = [];
         o.add_had = add_had;
-        getbeerhad();
-        getbeerwant();
+        o.getbeerhad = getbeerhad;
+        o.getbeerwant = getbeerwant;
         return o;
 
         // Functions list
@@ -336,6 +358,18 @@
                     o.beer_want.push(res[i]);
                 }
             });
+        }
+
+        function grab(beer) {
+            var q = $q.defer();
+            $http.post('/api/beers/grab', beer).success(function (res) {
+                o.grabbed.length = 0;
+                if (res) {
+                    o.grabbed.push(res);
+                    q.resolve();
+                }
+            });
+            return q.promise;
         }
 
 

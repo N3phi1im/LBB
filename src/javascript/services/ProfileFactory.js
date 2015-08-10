@@ -12,9 +12,10 @@
 		var o = {};
 		o.beer_had = [];
 		o.beer_want = [];
+		o.grabbed = [];
 		o.add_had = add_had;
-		getbeerhad();
-		getbeerwant();
+		o.getbeerhad = getbeerhad;
+		o.getbeerwant = getbeerwant;
 		return o;
 
 		// Functions list
@@ -54,6 +55,18 @@
 					o.beer_want.push(res[i]);
 				}
 			});
+		}
+
+		function grab(beer) {
+			var q = $q.defer();
+			$http.post('/api/beers/grab', beer).success(function(res) {
+				o.grabbed.length = 0;
+				if(res) {
+					o.grabbed.push(res);
+					q.resolve();
+				}
+			});
+			return q.promise;
 		}
 
 

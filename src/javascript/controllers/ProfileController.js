@@ -14,6 +14,10 @@
 		pc.beer_want = ProfileFactory.beer_want;
 		pc.add_had = add_had;
 		pc.add_want = add_want;
+		pc.grab = grab;
+		pc.grabbed = ProfileFactory.grabbed;
+		ProfileFactory.getbeerhad();
+		ProfileFactory.getbeerwant();
 
 		// Functions List
 
@@ -27,6 +31,13 @@
 			ProfileFactory.add_want(beer).then(function() {
 				$state.go('Home');
 			});
+		}
+
+		function grab(beer) {
+			pc.beers.id = beer;
+				ProfileFactory.grab(pc.beers).then(function() {
+					$state.go('Profile_beer');
+				});
 		}
 
 	}

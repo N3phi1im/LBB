@@ -3,9 +3,9 @@
 	angular.module('app')
 	.controller('IndexController', IndexController);
 
-	IndexController.$inject = ["UserFactory", "$state", "$window"];
+	IndexController.$inject = ["UserFactory", "ProfileFactory", "$state", "$window"];
 
-	function IndexController(UserFactory, $state, $window) {
+	function IndexController(UserFactory, ProfileFactory, $state, $window) {
 
 		// Declarations
 
@@ -14,7 +14,7 @@
 		ix.status = UserFactory.status;
 		ix.register = register;
 		ix.login = login;
-		ix.logout = UserFactory.logout;
+		ix.logout = logout;
 
 		// Functions List
 
@@ -36,5 +36,12 @@
 				$state.go('Profile');
 			});
 		}
+
+		function logout() {
+			ProfileFactory.beer_had.length = 0;
+			ProfileFactory.beer_want.length = 0;
+			UserFactory.logout();
+		}
+
 	}
 })();
