@@ -24,12 +24,12 @@
 		function add_had(beer) {
 			var q = $q.defer();
 			$http.post('/api/beers/beer_had', beer, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}}).success(function(res) {
-				beer_had._id = res.id;
-				beer_had.dateHad = new Date();
-				beer_had.beer_had = beer;
+				beer._id = res.id;
+				beer.dateHad = new Date();
 				o.beer_had.push(beer);
 				q.resolve();
 			}).error(function(res) {
+				console.error('YOU DONE MESSED UP! A A RON!');
 				q.reject(res);
 			});
 			return q.promise;
@@ -41,7 +41,7 @@
 			$http.get('/api/beers/beer_had', {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}}).success(function(res) {
 				for (var i = 0; i < res.length; i++) {
 					res[i].dateHad = new Date(res[i].dateHad);
-					o.beer_had.push(res[i].beer_had);
+					o.beer_had.push(res[i]);
 				}
 			});
 		}

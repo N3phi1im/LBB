@@ -1,15 +1,16 @@
 <div class="" ng-controller="ProfileController as pc">
-  <div class="flex-container">
-    <div ng-repeat="beer in pc.beer_had">
-      <div class="flex-item">
+  <div class="">
+    <div ng-repeat="beer in pc.beer_had | orderBy: 'dateHad'">
+      <div class="row">
         <div class="panel panel-default">
-          <div class="panel-heading">
-            <h2 class="panel-title"><b>{{beer.beer_had.nameDisplay}}</b></h2>
+          <div class="panel-heading" ng-click="pc.profile_beer()">
+            <h2 class="panel-title h-center font_beer"><b>{{beer.nameDisplay}}</b></h2>
           </div>
           <div class="panel-body">
             <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>
-            <p class='float_right' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</p>
-            <p class='' ng-show='beer.style.name != null'><i>Style:&nbsp;</i><p>{{beer.style.name}}</p></p>
+            <span class='' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</span>
+            <button type="button" class="btn btn-xs btn-danger btn_beer float_right glyphicon glyphicon-thumbs-down" ng-click=''></button>
+            <button type="button" class="btn btn-xs btn-success btn_beer float_right glyphicon glyphicon-thumbs-up" ng-click=''></button>
           </div>
         </div>
       </div>

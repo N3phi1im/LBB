@@ -22,11 +22,19 @@ router.get('/beer_had', auth, function(req, res, next) {
 
 // Send beer to Had
 
-router.post('/beer_had', function(req, res, next) {
+router.post('/beer_had', auth, function(req, res, next) {
   var cbeer = new Beer_had(req.body);
   cbeer.dateHad = new Date();
-  cbeer.beer_had = req.body;
-  cbeer.save(function(err, task) {
+  cbeer.description = req.body.description;
+  cbeer.nameDisplay = req.body.nameDisplay;
+  cbeer.abv = req.body.abv;
+  cbeer.ibu = req.body.ibu;
+  cbeer.id = req.body.id;
+  cbeer.available = req.body.available.name;
+  cbeer.label = req.body.labels.medium;
+  cbeer.style = req.body.style.shortName;
+  cbeer.user = req.payload.id;
+  cbeer.save(function(err, beer_had) {
     if(err) return next(err);
     res.send({id: beer_had._id});
   });

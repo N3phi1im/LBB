@@ -8,7 +8,14 @@ var mongoose = require('mongoose');
 var BeerSchema = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   dateHad: Date,
-  beer_had: []
+  description: String,
+  nameDisplay: String,
+  abv: String,
+  ibu: String,
+  id: String,
+  available: String,
+  label: String,
+  style: String
 });
 
 // Module ready for use

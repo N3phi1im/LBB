@@ -6,7 +6,7 @@
     function Config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('Home', {
             url: '/',
-            templateUrl: 'views/home.html'
+            templateUrl: 'views/Home.html'
         }).state('Register', {
             url: '/Register',
             templateUrl: 'views/register.html'
@@ -302,12 +302,12 @@
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
             }).success(function (res) {
-                beer_had._id = res.id;
-                beer_had.dateHad = new Date();
-                beer_had.beer_had = beer;
+                beer._id = res.id;
+                beer.dateHad = new Date();
                 o.beer_had.push(beer);
                 q.resolve();
             }).error(function (res) {
+                console.error('YOU DONE MESSED UP! A A RON!');
                 q.reject(res);
             });
             return q.promise;
@@ -323,7 +323,7 @@
             }).success(function (res) {
                 for (var i = 0; i < res.length; i++) {
                     res[i].dateHad = new Date(res[i].dateHad);
-                    o.beer_had.push(res[i].beer_had);
+                    o.beer_had.push(res[i]);
                 }
             });
         }
