@@ -19,7 +19,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" ui-sref="Profile">LittleBeerBook</a>
+				<a class="navbar-brand" ng-show="ix.status.isLoggedIn" ui-sref="Profile">LittleBeerBook</a>
+				<a class="navbar-brand" ng-show="!ix.status.isLoggedIn" ui-sref="Login">LittleBeerBook</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" collapse="!ix.navbarCollapsed">
