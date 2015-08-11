@@ -451,7 +451,9 @@
 
         function like(tf, id) {
             var q = $q.defer();
-            $http.post('/api/beers/beer_had/' + id, tf, {
+            $http.put('/api/beers/beer_had/' + id, {
+                like: tf
+            }, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
