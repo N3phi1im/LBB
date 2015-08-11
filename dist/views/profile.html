@@ -7,7 +7,7 @@
     <div ng-repeat="beer in pc.beer_had | orderBy: '-dateHad'">
       <div class="row">
         <div class="panel panel-default">
-          <div class="panel-heading" ng-click="pc.grabhad(beer._id, 'had')">
+          <div class="panel-heading c_p" ng-click="pc.grabhad(beer._id, 'had')">
             <h2 class="panel-title h-center font_beer"><b>{{beer.nameDisplay}}</b></h2>
           </div>
           <div class="panel-body">

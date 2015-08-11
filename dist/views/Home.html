@@ -7,7 +7,7 @@
   </form>
   <div class="flex-container">
     <div ng-repeat="beer in vm.results">
-      <div ng-controller='BeerController as bc' class="flex-item" ng-click='bc.grab(beer.id)'>
+      <div ng-controller='BeerController as bc' class="flex-item c_p" ng-click='bc.grab(beer.id)'>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title"><b class="font_beer">{{beer.nameDisplay}}</b></h2>
