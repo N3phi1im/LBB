@@ -9,8 +9,8 @@
           <div class="panel-body">
             <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>
             <p class='left' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</p>
-            <button type="button" class="btn btn-xs btn-danger btn_beer float_right glyphicon glyphicon-thumbs-down" ng-click='pc.like(false, beer._id)'></button>
-            <button type="button" class="btn btn-xs btn-success btn_beer float_right glyphicon glyphicon-thumbs-up" ng-click='pc.like(true, beer._id)'></button>
+            <button type="button" class="btn btn-xs btn-danger btn_beer float_right glyphicon glyphicon-thumbs-down" ng-if='beer.like' ng-click='pc.like(false, beer._id)'></button>
+            <button type="button" class="btn btn-xs btn-success btn_beer float_right glyphicon glyphicon-thumbs-up" ng-if='beer.like' ng-click='pc.like(true, beer._id)'></button>
             <p><img ng-src='{{beer.label}}' class='float_right img img-responsive' ng-if='beer.label != null'></img></p>
             <p ng-show='beer.style != null'><i>Style:&nbsp;</i>{{beer.style}}</p>
             <p ng-show='beer.description != null'><i>Description: </i><p id="desc">{{beer.description}}</p></p>
