@@ -14,8 +14,12 @@
 		pc.beer_want = ProfileFactory.beer_want;
 		pc.add_had = add_had;
 		pc.add_want = add_want;
-		pc.grab = grab;
+		pc.grabhad = grabhad;
+		pc.grabwant = grabwant;
 		pc.grabbed = ProfileFactory.grabbed;
+		pc.delete_beer = delete_beer;
+		pc.tried = tried;
+		pc.like = like;
 		ProfileFactory.getbeerhad();
 		ProfileFactory.getbeerwant();
 
@@ -33,10 +37,36 @@
 			});
 		}
 
-		function grab(beer, which) {
-				ProfileFactory.grab(beer, which).then(function() {
-					$state.go('Profile_beer');
+		function grabhad(beer, which) {
+			ProfileFactory.grab(beer, which).then(function() {
+				$state.go('Profile_beer');
+			});
+		}
+
+		function grabwant(beer, which) {
+			ProfileFactory.grab(beer, which).then(function() {
+				$state.go('Wishlist_selected');
+			});
+		}
+
+		function delete_beer(id) {
+			ProfileFactory.delete_beer(id).then(function() {
+				$state.go('Wishlist');
+			});
+		}
+
+		function tried(beer, id) {
+			ProfileFactory.add_had(beer).then(function() {
+				ProfileFactory.delete_beer(id).then(function() {
+					$state.go('Wishlist');
 				});
+			});
+		}
+
+		function like(tf) {
+			ProfileFactory.like(tf).then(function() {
+					$state.go('Profile');
+			});
 		}
 
 	}

@@ -128,4 +128,29 @@ router.get('/grab/had/:beer_had_id', function(req, res, next) {
   res.send(req.beer);
 });
 
+router.delete('/beer_want/:beer_want_id', auth, function(req, res, next) {
+  Beer_want.remove({
+    _id: req.body._id,
+    user: req.payload._id
+  }, function(err) {
+    if(err) return next(err);
+  });
+  res.send();
+});
+
+router.post('/beer_had/:beer_had_id', function(req, res, next) {
+  Beer_had.update({
+    _id: req.body._id,
+    user: req.payload._id,
+    like: req.body.tf
+  }, function(err) {
+    if(err) return next(err);
+  });
+});
+
+router.use(function(err, req, res, next) {
+  res.status(400).json(err);
+});
+
+
 module.exports = router;

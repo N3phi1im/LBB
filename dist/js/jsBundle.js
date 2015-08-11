@@ -31,6 +31,9 @@
         }).state('Wishlist', {
             url: '/Wishlist',
             templateUrl: 'views/wishlist.html'
+        }).state('Wishlist_selected', {
+            url: '/Wishlist_selected',
+            templateUrl: 'views/profile_selected_beer_wishlist.html'
         });
         $urlRouterProvider.otherwise('/');
     }
@@ -66,9 +69,9 @@
     'use strict';
     angular.module('app').controller('HomeController', HomeController);
 
-    HomeController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "$state"];
+    HomeController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "$state", "$scope"];
 
-    function HomeController(HomeFactory, UserFactory, BeerFactory, $state) {
+    function HomeController(HomeFactory, UserFactory, BeerFactory, $state, $scope) {
 
         // Declarations
 
@@ -80,6 +83,7 @@
         vm.cats = BeerFactory.cats;
         vm.styles = BeerFactory.styles;
         vm.goHome = goHome;
+        $scope.isCollapsed = true;
 
         // Functions List
 
@@ -168,8 +172,12 @@
         pc.beer_want = ProfileFactory.beer_want;
         pc.add_had = add_had;
         pc.add_want = add_want;
-        pc.grab = grab;
+        pc.grabhad = grabhad;
+        pc.grabwant = grabwant;
         pc.grabbed = ProfileFactory.grabbed;
+        pc.delete_beer = delete_beer;
+        pc.tried = tried;
+        pc.like = like;
         ProfileFactory.getbeerhad();
         ProfileFactory.getbeerwant();
 
@@ -187,9 +195,35 @@
             });
         }
 
-        function grab(beer, which) {
+        function grabhad(beer, which) {
             ProfileFactory.grab(beer, which).then(function () {
                 $state.go('Profile_beer');
+            });
+        }
+
+        function grabwant(beer, which) {
+            ProfileFactory.grab(beer, which).then(function () {
+                $state.go('Wishlist_selected');
+            });
+        }
+
+        function delete_beer(id) {
+            ProfileFactory.delete_beer(id).then(function () {
+                $state.go('Wishlist');
+            });
+        }
+
+        function tried(beer, id) {
+            ProfileFactory.add_had(beer).then(function () {
+                ProfileFactory.delete_beer(id).then(function () {
+                    $state.go('Wishlist');
+                });
+            });
+        }
+
+        function like(tf) {
+            ProfileFactory.like(tf).then(function () {
+                $state.go('Profile');
             });
         }
 
@@ -315,6 +349,8 @@
         o.add_want = add_want;
         o.getbeerhad = getbeerhad;
         o.getbeerwant = getbeerwant;
+        o.delete_beer = delete_beer;
+        o.like = like;
         return o;
 
         // Functions list
@@ -397,6 +433,30 @@
                     o.grabbed.push(res);
                     q.resolve();
                 }
+            });
+            return q.promise;
+        }
+
+        function delete_beer(id) {
+            var q = $q.defer();
+            $http.delete('/api/beers/beer_want/' + id, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            }).success(function (res) {
+                q.resolve();
+            });
+            return q.promise;
+        }
+
+        function like(tf) {
+            var q = $q.defer();
+            $http.post('/api/beers/beer_had/' + id, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            }).success(function (res) {
+                q.resolve();
             });
             return q.promise;
         }

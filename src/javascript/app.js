@@ -31,6 +31,9 @@
 		}).state('Wishlist',{
 			url: '/Wishlist',
 			templateUrl: 'views/wishlist.html'
+		}).state('Wishlist_selected',{
+			url: '/Wishlist_selected',
+			templateUrl: 'views/profile_selected_beer_wishlist.html'
 		});
 		$urlRouterProvider.otherwise('/');
 	}

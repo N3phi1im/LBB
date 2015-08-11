@@ -3,9 +3,9 @@
 	angular.module('app')
 	.controller('HomeController', HomeController);
 
-	HomeController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "$state"];
+	HomeController.$inject = ["HomeFactory", "UserFactory", "BeerFactory", "$state", "$scope"];
 
-	function HomeController(HomeFactory, UserFactory, BeerFactory, $state) {
+	function HomeController(HomeFactory, UserFactory, BeerFactory, $state, $scope) {
 
 		// Declarations
 
@@ -17,6 +17,7 @@
 		vm.cats = BeerFactory.cats;
 		vm.styles = BeerFactory.styles;
 		vm.goHome = goHome;
+		$scope.isCollapsed = true;
 
 		// Functions List
 

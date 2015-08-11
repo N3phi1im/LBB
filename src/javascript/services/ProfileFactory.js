@@ -18,6 +18,8 @@
 		o.add_want = add_want;
 		o.getbeerhad = getbeerhad;
 		o.getbeerwant = getbeerwant;
+		o.delete_beer = delete_beer;
+		o.like = like;
 		return o;
 
 		// Functions list
@@ -87,6 +89,22 @@
 			});
 			return q.promise;
 		}
-		
+
+		function delete_beer(id) {
+			var q = $q.defer();
+			$http.delete('/api/beers/beer_want/' + id, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}}).success(function(res) {
+				q.resolve();
+			});
+			return q.promise;
+		}
+
+		function like(tf) {
+			var q = $q.defer();
+			$http.post('/api/beers/beer_had/' +id, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}}).success(function(res) {
+				q.resolve();
+			});
+			return q.promise;
+		}
+
 	}
 })();
