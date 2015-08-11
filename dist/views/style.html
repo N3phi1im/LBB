@@ -2,7 +2,7 @@
   <div class="">
     <div ng-repeat="style in vm.styles | orderBy: 'name'" >
         <div class="link-container" ng-click="isCollapsed = !isCollapsed">
-          <div class="link-body">
+          <div class="link-body stylebox">
             <i class="link-arrow btn glyphicon glyphicon-chevron-right"></i>
             <h2 class="btn-sm link-h2 font_beer">{{style.name}}</h2>
             <div collapse="isCollapsed">

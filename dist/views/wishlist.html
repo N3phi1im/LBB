@@ -1,7 +1,9 @@
 <div class="" ng-controller="ProfileController as pc">
   <div class="">
-    <button type="button" ui-sref="Profile" class="h-center mainbtn m-bot-5 btn btn-warning left">Beer I've had</button>
-    <button type="button" ui-sref='Wishlist' class="h-center mainbtn m-bot-5 btn btn-info float_right">Beer Wishlist</button>
+    <div class="flex-container-sc">
+      <button type="button" ui-sref="Profile" class="h-center mainbtn m-bot-5 btn">Beer I've had</button>
+      <button type="button" ui-sref='Wishlist' class="h-center mainbtn m-bot-5 btn">Beer Wishlist</button>
+    </div>
     <div ng-repeat="beer in pc.beer_want">
       <div class="row">
         <div class="panel panel-default">
@@ -9,8 +11,8 @@
             <h2 class="panel-title h-center font_beer"><b>{{beer.nameDisplay}}</b></h2>
           </div>
           <div class="panel-body">
-            <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>
-            <span class='left' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</span>
+            <!-- <p class='left' ng-if='beer.abv != null'><i>ABV:&nbsp;</i>{{beer.abv}}</p>
+            <span class='left' ng-if='beer.ibu != null'><i>IBU:&nbsp;</i>{{beer.ibu}}</span> -->
             <p ng-show='beer.style != null'><i>Style:&nbsp;</i>{{beer.style}}</p>
           </div>
         </div>

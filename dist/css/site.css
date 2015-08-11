@@ -21,6 +21,7 @@
 }
 
 .flex-item {
+  opacity: 0.9;
   padding: 5px;
   width: 175px;
   margin-top: 10px;
@@ -73,7 +74,8 @@
 }
 
 body {
-  margin-top: 45px;
+  margin-top: 55px;
+  background-image: url(http://bgfons.com/upload/wood%20_texture553.jpg);
 }
 
 .c_p {
@@ -97,7 +99,6 @@ body {
 
 .link-body {
   border-bottom-style: groove;
-  border-bottom-right-radius: 25%;
 }
 
 .link-arrow {
@@ -114,7 +115,7 @@ body {
 }
 
 .link-h2 {
-  margin: 0px;
+  margin: 4px;
   font-weight: bold;
 }
 
@@ -157,13 +158,36 @@ i {
 
 .m-bot-5 {
   margin-bottom: 5px;
+  border: 2px;
+  border-style: outset;
+  border-color: #1F2224;
 }
 
 .mainbtn {
   width: 49%;
+  background-color: #3B2819;
+  color: #FFFFFF;
 }
 
 .m-top-10 {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.row {
+  opacity: 0.825;
+}
+
+.stylebox {
+  background-color: #020202;
+  opacity: 0.825;
+}
+
+.active {
+  background-color: #25292B;
+  color: #25292B;
+}
+
+.panel-title {
+  opacity: 1;
 }
