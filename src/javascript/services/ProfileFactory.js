@@ -76,9 +76,9 @@
 			});
 		}
 
-		function grab(id) {
+		function grab(id, which) {
 			var q = $q.defer();
-			$http.get('/api/beers/grab/' + id).success(function(res) {
+			$http.get('/api/beers/grab/' + which + '/' + id).success(function(res) {
 				o.grabbed.length = 0;
 				if(res) {
 					o.grabbed.push(res);
@@ -87,7 +87,6 @@
 			});
 			return q.promise;
 		}
-
-
+		
 	}
 })();

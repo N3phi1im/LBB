@@ -12,7 +12,7 @@ var auth = jwt({secret: 'bananas', userProperty: 'payload'});
 
 // Set Params
 
-router.param('beer', function(req, res, next, id) {
+router.param('beer_had_id', function(req, res, next, id) {
   Beer_had.findOne({
     _id: id
   }).exec(function(err, beer) {
@@ -21,6 +21,17 @@ router.param('beer', function(req, res, next, id) {
     next();
   });
 });
+
+router.param('beer_want_id', function(req, res, next, id) {
+  Beer_want.findOne({
+    _id: id
+  }).exec(function(err, beer) {
+    if (err) return next(err);
+    req.beer = beer;
+    next();
+  });
+});
+
 
 // Get Beers Had
 
@@ -109,7 +120,11 @@ router.post('/beer_want', auth, function(req, res, next) {
   });
 });
 
-router.get('/grab/:beer', function(req, res, next) {
+router.get('/grab/want/:beer_want_id', function(req, res, next) {
+  res.send(req.beer);
+});
+
+router.get('/grab/had/:beer_had_id', function(req, res, next) {
   res.send(req.beer);
 });
 

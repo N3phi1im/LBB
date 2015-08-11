@@ -1,11 +1,11 @@
 <div class="" ng-controller="ProfileController as pc">
   <div class="">
-    <button type="button" ui-sref="Profile" class="mainbtn m-bot-5 btn btn-warning left">Beer I've had</button>
-    <button type="button" ui-sref='Wishlist' class="mainbtn m-bot-5 btn btn-info float_right">Beer Wishlist</button>
+    <button type="button" ui-sref="Profile" class="h-center mainbtn m-bot-5 btn btn-warning left">Beer I've had</button>
+    <button type="button" ui-sref='Wishlist' class="h-center mainbtn m-bot-5 btn btn-info float_right">Beer Wishlist</button>
     <div ng-repeat="beer in pc.beer_had | orderBy: '-dateHad'">
       <div class="row">
         <div class="panel panel-default">
-          <div class="panel-heading" ng-click="pc.grab(beer._id)">
+          <div class="panel-heading" ng-click="pc.grab(beer._id, 'had')">
             <h2 class="panel-title h-center font_beer"><b>{{beer.nameDisplay}}</b></h2>
           </div>
           <div class="panel-body">

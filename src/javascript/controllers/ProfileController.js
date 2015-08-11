@@ -33,8 +33,8 @@
 			});
 		}
 
-		function grab(beer) {
-				ProfileFactory.grab(beer).then(function() {
+		function grab(beer, which) {
+				ProfileFactory.grab(beer, which).then(function() {
 					$state.go('Profile_beer');
 				});
 		}
