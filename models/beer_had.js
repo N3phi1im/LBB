@@ -15,7 +15,8 @@ var BeerSchema = new mongoose.Schema({
   id: String,
   available: String,
   label: String,
-  style: String
+  style: String,
+  like: Boolean
 });
 
 // Module ready for use

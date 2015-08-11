@@ -63,8 +63,8 @@
 			});
 		}
 
-		function like(tf) {
-			ProfileFactory.like(tf).then(function() {
+		function like(tf, id) {
+			ProfileFactory.like(tf, id).then(function() {
 					$state.go('Profile');
 			});
 		}

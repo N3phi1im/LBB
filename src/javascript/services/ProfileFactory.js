@@ -98,9 +98,9 @@
 			return q.promise;
 		}
 
-		function like(tf) {
+		function like(tf, id) {
 			var q = $q.defer();
-			$http.post('/api/beers/beer_had/' +id, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}}).success(function(res) {
+			$http.post('/api/beers/beer_had/' + id, tf, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}}).success(function(res) {
 				q.resolve();
 			});
 			return q.promise;

@@ -221,8 +221,8 @@
             });
         }
 
-        function like(tf) {
-            ProfileFactory.like(tf).then(function () {
+        function like(tf, id) {
+            ProfileFactory.like(tf, id).then(function () {
                 $state.go('Profile');
             });
         }
@@ -449,9 +449,9 @@
             return q.promise;
         }
 
-        function like(tf) {
+        function like(tf, id) {
             var q = $q.defer();
-            $http.post('/api/beers/beer_had/' + id, {
+            $http.post('/api/beers/beer_had/' + id, tf, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
