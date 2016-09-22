@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var BreweryDb = require('brewerydb-node');
 var brewdb = new BreweryDb('6fc41969a626d0aa90d7a610f9e55dfb');
-var dotenv = require('dotenv');
+require('dotenv').config();
 
 // Models for Passport
 
