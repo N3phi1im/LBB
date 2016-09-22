@@ -12,6 +12,7 @@
     "body-parser": "^1.12.4",
     "brewerydb-node": "0.0.1",
     "crypto": "0.0.3",
+    "dotenv": "^2.0.0",
     "ejs": "^2.3.1",
     "express": "^4.12.4",
     "express-jwt": "^3.0.1",

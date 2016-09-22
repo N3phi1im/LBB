@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var BreweryDb = require('brewerydb-node');
 var brewdb = new BreweryDb('6fc41969a626d0aa90d7a610f9e55dfb');
+var dotenv = require('dotenv');
 
 // Models for Passport
 
@@ -18,7 +19,7 @@ require('./config/passport');
 
 // Connect to the DB
 
-mongoose.connect('mongodb://johndoe:123123@ds031183.mongolab.com:31183/littlebeerbook');
+mongoose.connect(process.env.DB);
 
 // Routing
 
