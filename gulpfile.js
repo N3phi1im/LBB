@@ -47,3 +47,6 @@ gulp.task('watch', function(){
 	gulp.watch('src/sass/*', ['styles']);
 	gulp.watch('src/javascript/**', ['scripts']);
 });
+
+
+gulp.task('default', ['styles', 'scripts']);

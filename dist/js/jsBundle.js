@@ -48,12 +48,10 @@
     function BeerController(HomeFactory, UserFactory, BeerFactory, $state) {
 
         // Declarations
-
         var bc = this;
         bc.grabbed = BeerFactory.grabbed;
         bc.beers = {};
         // Functions List
-
         bc.grab = function (beer) {
             bc.beers.id = beer;
             BeerFactory.grab(bc.beers).then(function () {
@@ -74,7 +72,6 @@
     function HomeController(HomeFactory, UserFactory, BeerFactory, $state, $scope) {
 
         // Declarations
-
         var vm = this;
         vm.search = searchBeer;
         vm.getCategory = getCategory;
@@ -119,7 +116,6 @@
     function IndexController(UserFactory, ProfileFactory, $state, $window) {
 
         // Declarations
-
         var ix = this;
         ix.user = {};
         ix.status = UserFactory.status;
@@ -166,7 +162,6 @@
     function ProfileController(HomeFactory, UserFactory, BeerFactory, ProfileFactory, $state) {
 
         // Declarations
-
         var pc = this;
         pc.beer_had = ProfileFactory.beer_had;
         pc.beer_want = ProfileFactory.beer_want;
@@ -239,7 +234,6 @@
     function BeerFactory($http, $q) {
 
         // Operations shortcuts
-
         var o = {};
         o.results = [];
         o.grabbed = [];
@@ -252,7 +246,6 @@
         return o;
 
         // Functions list
-
         // Search Beer
 
         function searchBeer(search) {
@@ -320,13 +313,11 @@
     function HomeFactory($http, $q) {
 
         // Operations shortcuts
-
         var o = {};
 
         return o;
 
         // Functions list
-
     }
 })();
 
@@ -339,7 +330,6 @@
     function ProfileFactory($http, $q) {
 
         // Operations shortcuts
-
         var o = {};
         o.beer_had = [];
         o.beer_want = [];
@@ -354,7 +344,6 @@
         return o;
 
         // Functions list
-
         // Add beer Had
 
         function add_had(beer) {
@@ -475,7 +464,6 @@
     function UserFactory($http, $q, $state) {
 
         // Operations shortcuts
-
         var o = {};
         o.status = {};
         if (getToken()) {
@@ -491,7 +479,6 @@
         return o;
 
         // Functions list
-
         // Register User and Log them in
 
         function register(user) {
